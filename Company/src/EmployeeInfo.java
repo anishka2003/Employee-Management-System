@@ -32,7 +32,7 @@ public class EmployeeInfo extends JFrame {
 	private JComboBox comboBoxSelect;
 	private JLabel lblClock;
 
-
+//
 	
 	
 	
@@ -358,3 +358,20 @@ public EmployeeInfo() {
 			e.printStackTrace();
 		}
 	}
+
+	public void Search(){
+		try {
+			String selection = (String)comboBoxSelect.getSelectedItem();
+            String query = "select EID, Name, Surname, Age from Employeeinfo where " + selection +" = ? ";
+			PreparedStatement pst = connection.prepareStatement(query);
+			
+			pst.setString(1, textFieldSearch.getText());
+			ResultSet rs = pst.executeQuery();
+			
+			table.setModel(DbUtils.resultSetToTableModel(rs));
+			pst.close();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}	
