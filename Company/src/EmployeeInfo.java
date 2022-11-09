@@ -334,4 +334,9 @@ public EmployeeInfo() {
 		Clock();
 	}
 	
-	
+	public void Reset(){
+		textFieldEID.setText("");
+		textFieldName.setText("");
+		textFieldSurname.setText("");
+		textFieldAge.setText("");
+	}	
