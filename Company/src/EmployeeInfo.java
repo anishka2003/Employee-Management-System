@@ -340,3 +340,21 @@ public EmployeeInfo() {
 		textFieldSurname.setText("");
 		textFieldAge.setText("");
 	}	
+	
+	public void LoadList(){
+		try {
+			String query = "select * from Employeeinfo ";
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+			
+			DefaultListModel<String> DLM = new DefaultListModel<String>();
+			
+			while(rs.next()){
+				DLM.addElement(rs.getString("Name"));
+			}
+			listName.setModel(DLM);
+			pst.close();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
