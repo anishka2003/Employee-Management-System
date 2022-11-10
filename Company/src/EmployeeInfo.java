@@ -33,9 +33,101 @@ public class EmployeeInfo extends JFrame {
 	private JLabel lblClock;
 
 //
+public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					EmployeeInfo frame = new EmployeeInfo();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public void Clock(){
+		
+		Thread clock = new Thread()
+		{
+			public void run(){
+				try {
+					while(true){
+					Calendar cal = new GregorianCalendar();
+					int day = cal.get(Calendar.DAY_OF_MONTH);
+					int month = cal.get(Calendar.MONTH);
+					int year = cal.get(Calendar.YEAR);
+					
+					int second = cal.get(Calendar.SECOND);
+					int minute = cal.get(Calendar.MINUTE);
+					int hour = cal.get(Calendar.HOUR);
+					
+					lblClock.setText("Time " + hour +" : "+ minute + " : " + second +" Date " + year + " / " + month + " / " + day );
+					sleep(1000);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		clock.start();
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	Connection connection = null;
+	private JLabel lblNewLabel;
+	private final JLabel lblDesignedByMr = new JLabel("Designed By: Takshitha");
+	private JLabel lblID;
+	private JLabel lblName;
+	private JLabel lblSurname;
+	private JLabel lblAge;
+	private JTextField textFieldEID;
+	private JTextField textFieldName;
+	private JTextField textFieldSurname;
+	private JTextField textFieldAge;
+	private JButton btnSave;
+	private JButton btnUpdate;
+	private JButton btnDelete;
+	private JLabel lblNewLabel_3;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
+	private JTextField textFieldSearch;
+	private JButton btnSearch;
 	
 	
 	
+	
+	
+	public void refreshTable(){
+		
+		try {
+			String query = "select EID, Name, Surname, Age from Employeeinfo";
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+			table.setModel(DbUtils.resultSetToTableModel(rs));
+			pst.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public void fillComboBox(){
+		try {
+			String query ="select * from Employeeinfo";
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()){
+				comboBoxName.addItem(rs.getString("Name"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 public EmployeeInfo() {
 		
