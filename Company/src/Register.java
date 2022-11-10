@@ -134,7 +134,7 @@ public class Register extends JFrame {
 		BtnRegister.setBounds(342, 153, 97, 30);
 		contentPane.add(BtnRegister);
 		
-		JLabel label_Design = new JLabel("Designed By: Mr.Dina Chanthan");
+		JLabel label_Design = new JLabel("Designed By: Amol Singh");
 		label_Design.setHorizontalAlignment(SwingConstants.CENTER);
 		label_Design.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 12));
 		label_Design.setBounds(239, 216, 200, 23);
